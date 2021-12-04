@@ -13,6 +13,20 @@ http://cat2151.github.io/games-crisp-game-lib/?hello2
 - 構成のサンプル
     - 1ディレクトリに1ゲーム
 
+## コードを貼るとどうなるかテスト
+
+```JavaScript
+function update() {
+  color("purple");
+  box(50, 50, 20, 10);
+  color("green");
+  if (box(input.pos, 5, 5).isColliding.rect.purple) {
+    end();
+  }
+}
+
+```
+
 # 関連情報
 
 - 公式 crisp-game-lib
