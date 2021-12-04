@@ -13,18 +13,70 @@ http://cat2151.github.io/games-crisp-game-lib/?hello2
 - 構成のサンプル
     - 1ディレクトリに1ゲーム
 
-## コードを貼るとどうなるかテスト
+## コードのサンプル crisp-game-lib
+- それぞれ、貼るだけで動きます。
+- サンプルなのでスコアやゲーム駆け引きはあったりなかったり。
+- 公式のほうが詳しいです。
+- 書き換えて遊びましょう。
+
+- 描画
+```JavaScript
+function update() {
+  color("red");
+  box(      20, 20, 15, 20);
+  rect(     70, 20, 20, 25);
+  bar(      20, 70, 18,  5, 0.7, 0.5);
+  line(     70, 70, 90, 80);
+  arc(      30, 60, 20,  5, 0.1, 1.5);
+  text("a", 10, 20);
+  char("a", 30, 40);
+}
+```
 
 ```JavaScript
 function update() {
-  color("purple");
-  box(50, 50, 20, 10);
+  color("red");
+  let o = (ticks / 20) % 3;
+  box(      20 + o, 20, 15, 20);
+  rect(     70 - o, 20, 20, 25);
+  bar(      20 + o, 70, 18,  5, 0.7, 0.5);
+  line(     70 - o, 70, 90, 80);
+  arc(      30 + o, 60, 20,  5, 0.1, 1.5);
+  text("a", 10 - o, 20);
+  char("a", 30 + o, 40);
+}
+```
+
+- 当たり判定
+  - green を動かして yellow を避けろ
+
+```JavaScript
+function update() {
+  color("yellow");
+  box(50, 60, 40, 30);
   color("green");
-  if (box(input.pos, 5, 5).isColliding.rect.purple) {
+  if (box(input.pos, 5, 5).isColliding.rect.yellow) {
     end();
   }
 }
+```
 
+```JavaScript
+options = {
+  isPlayingBgm: true,
+};
+function update() {
+  color("yellow");
+  let o = ticks % 100;
+  let s = (difficulty - 1) * 500;
+  box(o, o, s, s);
+  color("green");
+  if (box(input.pos, 5, 5).isColliding.rect.yellow) {
+    play("explosion");
+    end();
+  }
+  addScore(1);
+}
 ```
 
 # 関連情報
