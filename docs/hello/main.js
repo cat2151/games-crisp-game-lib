@@ -9,7 +9,7 @@ options = {};
 
 function update() {
   if (!ticks) {
-    play("explosion");
+    play("coin");
   }
 
 }
