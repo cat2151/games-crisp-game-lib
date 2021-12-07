@@ -19,7 +19,95 @@ http://cat2151.github.io/games-crisp-game-lib/?hello2
 - 公式のほうが詳しいです。
 - 書き換えて遊びましょう。
 
-- 描画
+### 描画
+- color と box
+```JavaScript
+function update() {
+  color("red");
+  box(20, 20, 15, 20);
+  color("green");
+  box(40, 40, 15, 20);
+}
+```
+- box
+```JavaScript
+function update() {
+  box(50, 50, 60, 60);
+}
+```
+- rect
+```JavaScript
+function update() {
+  rect(50, 50, 40, 40);
+}
+```
+- box と rect
+```JavaScript
+function update() {
+  color("red");
+  box( 50, 50, 25, 25);
+  color("green");
+  rect(50, 50, 25, 25);
+}
+```
+- bar
+```JavaScript
+function update() {
+  bar(50, 50, 60, 3, PI / 8, 0.5);
+}
+```
+- bar 回転
+```JavaScript
+function update() {
+  let t1= (ticks % 60) / 60;
+  let t2= ((ticks / 60) % 20) / 20;
+  bar(50, 50, 20, 3, PI * 2 * t1, t2);
+}
+```
+- line
+```JavaScript
+function update() {
+  line(50, 50, 90, 90);
+}
+```
+
+- line 動く
+```JavaScript
+function update() {
+  let l = ticks % 100;
+  line(20, l, l, 30);
+}
+```
+- arc
+```JavaScript
+function update() {
+  arc(50, 50, 50, 3, PI / 4, PI);
+}
+```
+
+- text
+```JavaScript
+function update() {
+  text("hello", 33, 40);
+}
+```
+- char
+```JavaScript
+characters = [
+  `
+rrrrrr
+rCrCrr
+rCrCrr
+rrrrrr
+rrCrrr
+rrrrrr
+`];
+function update() {
+  char("a", 33, 40);
+}
+```
+
+- 描画まとめ
 ```JavaScript
 function update() {
   color("red");
@@ -33,6 +121,7 @@ function update() {
 }
 ```
 
+- 描画まとめ 動く
 ```JavaScript
 function update() {
   color("red");
@@ -49,7 +138,6 @@ function update() {
 
 - 当たり判定
   - green を動かして yellow を避けろ
-
 ```JavaScript
 function update() {
   color("yellow");
@@ -61,6 +149,8 @@ function update() {
 }
 ```
 
+- 当たり判定
+  - green を動かし、動く yellow を避けろ
 ```JavaScript
 options = {
   isPlayingBgm: true,
@@ -76,6 +166,60 @@ function update() {
     end();
   }
   addScore(1);
+}
+```
+- 解像度 31x19
+```JavaScript
+options = {
+	viewSize: {x: 1 + 6 * 5, y: 1 + 6 * 3},
+};
+function update() {
+  text("hello", 3, 3 + 6 * 1);
+  text("world", 3, 3 + 6 * 2);
+}
+```
+
+- 解像度 640x480
+```JavaScript
+options = {
+	viewSize: {x: 640, y: 480},
+};
+function update() {
+  text("hello", 3, 3 + 6 * 1);
+  text("world", 3, 3 + 6 * 2);
+}
+```
+
+- 宇宙風味、解像度240x320
+```JavaScript
+const G = {
+	WIDTH: 240,
+	HEIGHT: 320
+};
+options = {
+	viewSize: {x: G.WIDTH, y: G.HEIGHT},
+  theme: "dark"
+};
+let stars;
+function update() {
+  if (!ticks) {
+    stars = times(20, () => {
+      const posX = rnd(0, G.WIDTH);
+      const posY = rnd(0, G.HEIGHT);
+      return {
+        pos: vec(posX, posY),
+        speed: rnd(0.5, 1.0)
+      };
+    });
+  }
+  stars.forEach((s) => {
+    s.pos.y += s.speed;
+    s.pos.wrap(0, G.WIDTH, 0, G.HEIGHT);
+    color("light_black");
+    box(s.pos, 1);
+  });
+  bar(G.WIDTH / 2, G.HEIGHT * 0.75, 100, 5, PI * 2 * (ticks % 120) / 120, 0.5);
+  text("hello, world!", G.WIDTH / 3, G.HEIGHT / 2);
 }
 ```
 
