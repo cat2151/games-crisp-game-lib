@@ -149,6 +149,55 @@ function update() {
 }
 ```
 
+- 音
+```JavaScript
+function update() {
+  play("coin");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("explosion");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("hit");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("jump");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("laser");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("lucky");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("powerUp");
+}
+```
+- 音
+```JavaScript
+function update() {
+  play("select");
+}
+```
+
 - 当たり判定
   - green を動かして yellow を避けろ
 ```JavaScript
