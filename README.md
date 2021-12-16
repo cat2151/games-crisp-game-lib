@@ -252,6 +252,24 @@ function update() {
 }
 ```
 
+- FizzBuzz風
+```JavaScript
+function update() {
+  let t = Math.floor(ticks / 60);
+  let s;
+  if (t % 15 === 0) {
+    s = "FizzBuzz";
+  } else if (t % 3 === 0) {
+    s = "Fizz";
+  } else if (t % 5 === 0) {
+    s = "Buzz";
+  } else {
+    s = t.toString();
+  }
+  text(s, 50, 50);
+}
+```
+
 - 宇宙風味、解像度240x320
 ```JavaScript
 const G = {
