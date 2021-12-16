@@ -4,11 +4,15 @@
 # chromeクリップボードsaver
 # クリップボードが変化し、かつ、アクティブウィンドウ.Name が $target（デフォルトはchrome） の場合、
 #   指定したファイルにセーブします
+#   ファイル指定は、コマンドライン引数または起動後のファイル選択ダイアログで行います
 # 用途の例
 #   GitHubのMarkdownで書かれたサンプルコードのコードブロックが大量にあるとき、
 #   それぞれの右上のコピーボタンをクリックしてゆくだけで
 #   サンプルコードをどんどん実行していける。
 #   そうするには、当ツールを起動して「npm run watch_games等で更新監視中のmain.js等」を指定すればよい。
+
+# コマンドライン引数を得る
+Param([string] $filename)
 
 # 設定
 $target = "chrome"
@@ -81,7 +85,9 @@ function onChangeClipboardText() {
 }
 
 #
-$filename = openFileDialog "クリップボードセーブするファイルを選んでください"
+if ([string]::IsNullOrEmpty($filename)) {
+    $filename = openFileDialog "クリップボードセーブするファイルを選んでください"
+}
 "バックアップします：[" + $filename + "]"
 backup $filename
 "クリップボードを監視してセーブします：[" + $filename + "]"
