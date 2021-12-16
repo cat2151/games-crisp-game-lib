@@ -12,5 +12,8 @@ start npm run watch_games
 rem browser
 start http://localhost:4000?%TODAY%
 
+rem browser clipboard to main.js
+start chromeClipboardSaver.bat %BASE%%TODAY%\main.js
+
 rem vscode
 code %BASE%%TODAY%\main.js
