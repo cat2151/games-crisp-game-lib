@@ -303,6 +303,28 @@ function update() {
 }
 ```
 
+- 実験用 ticks と window.performance.now()
+  - window.performance.now() は実験用のため例外的に使っているが、実際のゲームではticksを使うべし。でないとリプレイが破綻するはず。
+```JavaScript
+function update() {
+  text(floor(window.performance.now() / (1000 / 60)).toString(), 3, 12);
+  text(ticks.toString(), 3, 21);
+}
+```
+
+- 実験用 1フレームごとの実時間
+  - window.performance.now() は実験用のため例外的に使っているが、実際のゲームではticksを使うべし。でないとリプレイが破綻するはず。
+```JavaScript
+let lastUpdateTimeMsec = 0;
+function update() {
+  let now = window.performance.now();
+  let deltaMsecInt = floor(now - lastUpdateTimeMsec);
+  let xy = clamp((deltaMsecInt - 10) * 6, 10, 90);
+  text(deltaMsecInt.toString(), xy, xy);
+  lastUpdateTimeMsec = now;
+}
+```
+
 # 関連情報
 
 - 公式 crisp-game-lib
